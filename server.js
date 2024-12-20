@@ -5,8 +5,9 @@ const app = express();
 app.use(express.static('public'));
 
 // Start the Express server
-const expressServer = app.listen(4000, () => {
-    console.log('Server is running on port 4000');
+const port = process.env.PORT || 4000; // Use the assigned port or fallback to 4000
+const expressServer = app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
 
 // Import and initialize Socket.IO with the Express server
