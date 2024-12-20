@@ -8,7 +8,7 @@ var getVar = player.GetVar;
 window.Script1 = function()
 {
   console.log(io); 
-const socket = io('http://localhost:4000'); 
+const socket = io('https://kahoot-1.vercel.app/'); 
 
 let player = GetPlayer(); 
 
@@ -98,7 +98,7 @@ player.SetVar("correct_answer", quizQuestions[question_no].correctAnswer);
 
 window.Script3 = function()
 {
-  const socket = io('http://localhost:4000'); 
+  const socket = io('https://kahoot-1.vercel.app/'); 
 
 let player = GetPlayer(); 
 let name = player.GetVar("name"); 
