@@ -8,7 +8,7 @@ var getVar = player.GetVar;
 window.Script1 = function()
 {
   console.log(io); 
-const socket = io('https://tide-nebulous-diascia.glitch.me/'); 
+const socket = io('https://fahoot.glitch.me/'); 
 
 let player = GetPlayer(); 
 
@@ -98,7 +98,7 @@ player.SetVar("correct_answer", quizQuestions[question_no].correctAnswer);
 
 window.Script3 = function()
 {
-  const socket = io('https://tide-nebulous-diascia.glitch.me/'); 
+  const socket = io('https://fahoot.glitch.me/'); 
 
 let player = GetPlayer(); 
 let name = player.GetVar("name"); 
