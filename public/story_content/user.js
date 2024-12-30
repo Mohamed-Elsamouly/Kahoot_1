@@ -7,33 +7,24 @@ var setVar = player.SetVar;
 var getVar = player.GetVar;
 window.Script1 = function()
 {
-  console.log(io); // Ensure `io` is available (e.g., Socket.IO library is loaded)
-
-// Initialize the socket connection
+  console.log(io); 
 const socket = io('https://fahoot.glitch.me/'); 
 
-// Get the player object
-let player = GetPlayer();
+let player = GetPlayer(); 
 
-// Select the button element
 let btn = document.querySelector("[data-acc-text='btn']");
 
-// Add event listeners for both click and touchend events
-btn.addEventListener("click", sendName);
-btn.addEventListener("touchend", sendName);
-
-// Function to send the player's name
-function sendName() {
-    let name = player.GetVar("name"); // Get the player's name
-    if (name !== '') { // Check if the name is not empty
-        socket.emit("find", { name: name }); // Emit the "find" event with the name
+btn.addEventListener("click", function () {
+	let name = player.GetVar("name"); 
+    if (name != '') {
+        socket.emit("find", {name: name});
     }
-}
-
-// Listen for the "find" event from the server
-socket.on("find", (e) => {
-    player.SetVar("connected", e.connected); // Update the player's "connected" variable
 });
+
+socket.on("find", (e) => {
+    player.SetVar("connected", e.connected);
+});
+
 }
 
 window.Script2 = function()
