@@ -1,25 +1,28 @@
 const express = require('express');
-const http = require('http');
-const socketio = require('socket.io');
-
 const app = express();
 
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
 
-// Create an HTTP server using Express
-const server = http.createServer(app);
+// Start the Express server
+/*const expressServer = app.listen(4000, () => {
+    console.log('Server is running on port 4000');
+});
+*/
+const expressServer = app.listen(process.env.PORT || 4000, () => {
+    console.log(`Server is running on port ${process.env.PORT || 4000}`);
+});
 
-// Initialize Socket.IO with the HTTP server
-const io = socketio(server);
+
+// Import and initialize Socket.IO with the Express server
+const socketio = require('socket.io');
+const io = socketio(expressServer);
 
 let players = []; // This will store both player names and their scores
 let playersScore = []; 
 
 // Socket.IO logic
 io.on('connection', (socket) => {
-    console.log('A player connected');
-
     // Listen for "find" event (player name submission)
     socket.on("find", (e) => {
         // Store player name and initialize their score to 0
@@ -45,14 +48,4 @@ io.on('connection', (socket) => {
             playersScore = []; // Reset players array after emitting the data
         }
     });
-
-    socket.on('disconnect', () => {
-        console.log('A player disconnected');
-    });
 });
-
-// Export the server as the default export for Vercel
-module.exports = (req, res) => {
-    // Vercel expects the server to handle the request and response directly
-    server.emit('request', req, res);
-};
